@@ -15,10 +15,10 @@ inputs:
 runs:
     using: "composite"
     steps:
-        - name: Checkout repo
-          uses: actions/checkout@v2
-          with:
-            path: repo
+        #- name: Checkout repo
+        #  uses: actions/checkout@v2
+        #  with:
+        #    path: repo
         - name: Install Python
           uses: actions/setup-python@v2
           with:

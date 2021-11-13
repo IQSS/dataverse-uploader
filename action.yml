@@ -29,8 +29,4 @@ runs:
             python -m pip install --upgrade pip
             pip install -r $GITHUB_ACTION_PATH/requirements.txt
             ls -ls
-            >-
-            python #GITHUB_ACTION_PATH/dataverse.py 
-            "${{inputs.DATAVERSE_TOKEN}}" 
-            "${{inputs.DATAVERSE_SERVER}}" 
-            "${{inputs.DATAVERSE_DATASET_DOI}}"
+            python #GITHUB_ACTION_PATH/dataverse.py "${{inputs.DATAVERSE_TOKEN}}" "${{inputs.DATAVERSE_SERVER}}" "${{inputs.DATAVERSE_DATASET_DOI}}"

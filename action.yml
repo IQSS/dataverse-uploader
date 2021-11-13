@@ -11,6 +11,9 @@ inputs:
     DATAVERSE_DATASET_DOI:
       required: true
       description: "existing dataverse dataset doi"
+    GITHUB_DIR:
+      required: false
+      description: "upload only from specific dirs"
 
 runs:
     using: "composite"
@@ -37,4 +40,4 @@ runs:
             "${{inputs.DATAVERSE_SERVER}}" 
             "${{inputs.DATAVERSE_DATASET_DOI}}"
             $GITHUB_REPOSITORY
-            
+            -d "${{inputs.GITHUB_DIR}}" 

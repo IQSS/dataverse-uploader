@@ -23,10 +23,20 @@ runs:
           uses: actions/setup-python@v2
           with:
             python-version: '3.x'
-        - name: Upload files
+        - name: Install dependencies
           shell: bash
           run: |
             python -m pip install --upgrade pip
             pip install -r $GITHUB_ACTION_PATH/requirements.txt
-            ls -ls
-            python #GITHUB_ACTION_PATH/dataverse.py "${{inputs.DATAVERSE_TOKEN}}" "${{inputs.DATAVERSE_SERVER}}" "${{inputs.DATAVERSE_DATASET_DOI}}"
+        - name: Check repo dir
+          shell: bash
+          run: "ls -ls repo/"
+        - name: Upload files
+          shell: bash
+          run: >-
+            python 
+            #GITHUB_ACTION_PATH/dataverse.py 
+            "${{inputs.DATAVERSE_TOKEN}}" 
+            "${{inputs.DATAVERSE_SERVER}}" 
+            "${{inputs.DATAVERSE_DATASET_DOI}}"
+            

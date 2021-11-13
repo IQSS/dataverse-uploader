@@ -30,8 +30,10 @@ for f in files_list:
 # the following adds all files from the repository to Dataverse 
 
 for root, subdirs, files in walk('repo'):
-  if subdirs in ['.git', '.github']:
-     subdirs.remove(subdirs)
+  if '.git' in subdirs:
+     subdirs.remove('.git')
+  if '.github' in subdirs:
+     subdirs.remove('.github')
   for f in files:
      df = Datafile() 
      df.set({

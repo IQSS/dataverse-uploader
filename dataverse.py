@@ -1,7 +1,7 @@
 from pyDataverse.api import NativeApi, DataAccessApi
 from pyDataverse.models import Datafile
-from os.path import isfile, join
-from os import listdir
+from os.path import isdir, isfile, join
+from os import walk 
 import requests
 import hashlib
 import sys
@@ -9,6 +9,7 @@ import sys
 dataverse_token = sys.argv[1]
 dataverse_server = sys.argv[2].strip("/")
 dataverse_dataset_doi = sys.argv[3]
+github_repository = sys.argv[4]
 
 api = NativeApi(dataverse_server, dataverse_token)
 data_api = DataAccessApi(dataverse_server)
@@ -28,14 +29,21 @@ for f in files_list:
 
 # the following adds all files from the repository to Dataverse 
 
-path='repo'
-for f in listdir(path):
-  if not f.startswith('.'):
+for root, subdirs, files in walk('repo'):
+  if subdirs in ['.git', '.github']:
+     subdirs.remove(subdirs)
+  for f in files:
      df = Datafile() 
      df.set({
          "pid" : dataverse_dataset_doi,
-         "filename" : f,})
-     resp = api.upload_datafile(dataverse_dataset_doi, path+"/"+f, df.json())
+         "filename" : f,
+         "directoryLabel": root[5:], 
+         "description" : \
+           "Uploaded with GitHub Action from {}.".format(
+             github_repository), 
+          })
+     resp = api.upload_datafile(
+             dataverse_dataset_doi, join(root,f), df.json())
 
 # publish updated dataset
 

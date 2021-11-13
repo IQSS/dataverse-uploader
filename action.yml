@@ -36,4 +36,5 @@ runs:
             "${{inputs.DATAVERSE_TOKEN}}" 
             "${{inputs.DATAVERSE_SERVER}}" 
             "${{inputs.DATAVERSE_DATASET_DOI}}"
+            $GITHUB_REPOSITORY
             

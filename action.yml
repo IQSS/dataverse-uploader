@@ -35,7 +35,7 @@ runs:
           shell: bash
           run: >-
             python 
-            #GITHUB_ACTION_PATH/dataverse.py 
+            $GITHUB_ACTION_PATH/dataverse.py 
             "${{inputs.DATAVERSE_TOKEN}}" 
             "${{inputs.DATAVERSE_SERVER}}" 
             "${{inputs.DATAVERSE_DATASET_DOI}}"

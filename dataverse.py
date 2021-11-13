@@ -13,20 +13,20 @@ dataverse_dataset_doi = sys.argv[3]
 api = NativeApi(dataverse_server, dataverse_token)
 data_api = DataAccessApi(dataverse_server)
 
-# delete all
+# the following deletes all the files in the dataset 
 
-#dataset = api.get_dataset(dataverse_dataset_doi)
-#files_list = dataset.json()['data']['latestVersion']['files']
-#
-#delete_api = dataverse_server + \
-#             '/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/' 
-#for file in files_list:
-#   fileid = files_list[1]["dataFile"]["id"]
-#   resp = requests.delete(
-#       delete_api + str(fileid), headers={
-#           'Authorization' : dataverse_token})
+dataset = api.get_dataset(dataverse_dataset_doi)
+files_list = dataset.json()['data']['latestVersion']['files']
 
-# add all
+delete_api = dataverse_server + \
+             '/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/' 
+for f in files_list:
+   fileid = f["dataFile"]["id"]
+   resp = requests.delete(
+       delete_api + str(fileid), \
+       auth = (dataverse_token  , ""))
+
+# the following adds all files from the repository to Dataverse 
 
 path='repo'
 for f in listdir(path):

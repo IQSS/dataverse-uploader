@@ -24,6 +24,7 @@ runs:
           with:
             python-version: '3.x'
         - name: Upload files
+          shell: bash
           run: |
             python -m pip install --upgrade pip
             pip install -r requirements.txt

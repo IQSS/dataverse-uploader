@@ -15,10 +15,10 @@ inputs:
 runs:
     using: "composite"
     steps:
-        #- name: Checkout repo
-        #  uses: actions/checkout@v2
-        #  with:
-        #    path: repo
+        - name: Checkout repo
+          uses: actions/checkout@v2
+          with:
+            path: repo
         - name: Install Python
           uses: actions/setup-python@v2
           with:
@@ -29,9 +29,8 @@ runs:
             python -m pip install --upgrade pip
             pip install -r $GITHUB_ACTION_PATH/requirements.txt
             ls -ls
-          run: >-
-            python 
-            #GITHUB_ACTION_PATH/dataverse.py 
+            >-
+            python #GITHUB_ACTION_PATH/dataverse.py 
             "${{inputs.DATAVERSE_TOKEN}}" 
             "${{inputs.DATAVERSE_SERVER}}" 
             "${{inputs.DATAVERSE_DATASET_DOI}}"

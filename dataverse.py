@@ -30,6 +30,7 @@ data_api = DataAccessApi(dataverse_server)
 
 path='repo'
 for f in listdir(path):
+  if not f.startswith('.'):
      df = Datafile() 
      df.set({
          "pid" : dataverse_dataset_doi,

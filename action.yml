@@ -1,6 +1,10 @@
 name: 'Dataverse Uploader Action'
 description: 'Uploads a repository to Dataverse'
 
+branding:
+  icon: 'archive'
+  color: 'orange'
+
 inputs:
     DATAVERSE_TOKEN:
       required: true

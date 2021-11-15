@@ -22,6 +22,18 @@ def parse_arguments():
     args = parser.parse_args()
     return args
     
+
+def check_dataset_lock(dataset_dbid):
+    query_str = '/datasets/' + str(dataset_dbid) + '/locks'
+    params = {}
+    resp = api.get_request(query_str, params=params, auth=True)
+    locks = resp.json()['data']
+    if (locks):
+        print('Lock found for dataset id ' + str(dataset_dbid) + '... sleeping...')
+        time.sleep(2)
+        check_dataset_lock(dataset_dbid)
+
+
 if __name__ == '__main__':        
     args = parse_arguments()
     dataverse_server = args.server.strip("/") 
@@ -61,7 +73,8 @@ if __name__ == '__main__':
               })
          resp = api.upload_datafile(
                  args.doi, join(root,f), df.json())
-         sleep(0.05) # give some time to upload 
+         check_dataset_lock(
+                 resp['data']['files'][0]['dataFile']['id'])
     
     # publish updated dataset
     

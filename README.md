@@ -58,11 +58,19 @@ jobs:
           GITHUB_DIR: data
 ```
 
-## Dataverse DOI Badge
+## Related projects
 
-Check out [this page](https://atrisovic.github.io/dataverse-badge/) to create a Dataverse DOI Badge for your GitHub repository.
+Check out the following related projects:
+
+### Dataverse Badge 
+
+Visit [this page](https://atrisovic.github.io/dataverse-badge/) to create a Dataverse DOI Badge for your GitHub repository.
 
 [![](<https://img.shields.io/badge/Dataverse DOI-10.70122/FK2/LVUADQ-orange>)](https://demo.dataverse.org)
+
+### Stand-alone DVUploader
+
+Looking for a stand-alone Dataverse uploader that will work from the command line? Check out [DVUploader](https://github.com/GlobalDataverseCommunityConsortium/dataverse-uploader).
 
 ## Contact
 

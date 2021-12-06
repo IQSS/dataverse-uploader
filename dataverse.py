@@ -18,6 +18,10 @@ def parse_arguments():
 
     # Optional arguments
     parser.add_argument("-d", "--dir", help="Uploads only a specific dir.")
+    parser.add_argument(
+        "-r", "--remove", help="Remove (delete) all files before upload.", default=True)
+    parser.add_argument(
+        "-p", "--publish", help="Publish a new dataset version after upload.", default=True)
 
     args_ = parser.parse_args()
     return args_
@@ -49,18 +53,19 @@ if __name__ == '__main__':
     dataverse_server = args.server.strip("/")
     api = NativeApi(dataverse_server , token)
 
-    # the following deletes all the files in the dataset
     dataset = api.get_dataset(args.doi)
     files_list = dataset.json()['data']['latestVersion']['files']
     dataset_dbid = dataset.json()['data']['id']
 
-    delete_api = dataverse_server + \
-        '/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/'
-    for f in files_list:
-        fileid = f["dataFile"]["id"]
-        resp = requests.delete(
-            delete_api + str(fileid), \
-            auth = (token  , ""))
+    if args.remove is True:
+        # the following deletes all the files in the dataset
+        delete_api = dataverse_server + \
+            '/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/'
+        for f in files_list:
+            fileid = f["dataFile"]["id"]
+            resp = requests.delete(
+                delete_api + str(fileid), \
+                auth = (token  , ""))
 
     # the following adds all files from the repository to Dataverse
     path = join('repo',args.dir) if args.dir else 'repo'
@@ -84,6 +89,6 @@ if __name__ == '__main__':
                 args.doi, join(root,f), df.json())
             check_dataset_lock(5)
 
-    # publish updated dataset
-    resp = api.publish_dataset(args.doi, release_type="major")
-
+    if args.publish is True:
+        # publish updated dataset
+        resp = api.publish_dataset(args.doi, release_type="major")

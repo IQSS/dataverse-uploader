@@ -12,6 +12,8 @@ To use this action, you will need the following input parameters:
 | `DATAVERSE_SERVER` | **Yes** | The URL of your Dataverse installation, i.e., [https://dataverse.harvard.edu](https://dataverse.harvard.edu). |
 | `DATAVERSE_DATASET_DOI` | **Yes** | This action requires that a dataset (with a DOI) exists on the Dataverse server. Make sure to specify your DOI in this format: `doi:<doi>`, i.e., `doi:10.70122/FK2/LVUA`. |
 | `GITHUB_DIR` | No | Use `GITHUB_DIR` if you would like to upload files from only a specific subdirectory in your GitHub repository (i.e., just `data/`). |
+| `DELETE` | No | Can be `True` or `False` (by default `True`) depending on whether all files should be deleted in the dataset on Dataverse before upload. |
+| `PUBLISH` | No | Can be `True` or `False` (by default `True`) depending on whether you'd like to automatically create a new version of the dataset upon upload. If `False`, the uploaded dataset will be a `DRAFT`. |
 
 ## Usage
 
@@ -38,13 +40,9 @@ jobs:
           DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
 ```
 
-If you'd like to upload files from a specific subdirectory only, you should add the `GITHUB_DIR` argument in your action.
+If you'd like to upload files from a specific subdirectory only, you should add the `GITHUB_DIR` argument in your workflow.
 
 ```
-on: 
-  release:
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -56,6 +54,41 @@ jobs:
           DATAVERSE_SERVER: https://demo.dataverse.org
           DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
           GITHUB_DIR: data
+```
+
+If you wouldn't want the action to delete your dataset before upload (i.e., if you already have a Dataverse `DRAFT` dataset), set the `DELETE` argument to `False` like:
+
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repo to Dataverse 
+        uses: atrisovic/dataverse-uploader@master
+        with:
+          DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
+          DATAVERSE_SERVER: https://demo.dataverse.org
+          DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
+          GITHUB_DIR: data
+          DELETE: False
+```
+
+Upon upload, the action will automatically publish a new version of the Dataverse dataset by default. If you'd like to create a new version manually, set the `PUBLISH` argument to `False`.
+
+```
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repo to Dataverse 
+        uses: atrisovic/dataverse-uploader@master
+        with:
+          DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
+          DATAVERSE_SERVER: https://demo.dataverse.org
+          DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
+          GITHUB_DIR: data
+          DELETE: False
+          PUBLISH: False
 ```
 
 ## Related projects

@@ -19,9 +19,11 @@ def parse_arguments():
     # Optional arguments
     parser.add_argument("-d", "--dir", help="Uploads only a specific dir.")
     parser.add_argument(
-        "-r", "--remove", help="Remove (delete) all files before upload.", default=True)
+        "-r", "--remove", help="Remove (delete) all files before upload.", \
+        choices=('True', 'False'), default='True')
     parser.add_argument(
-        "-p", "--publish", help="Publish a new dataset version after upload.", default=True)
+        "-p", "--publish", help="Publish a new dataset version after upload.", \
+        choices=('True', 'False'), default='True')
 
     args_ = parser.parse_args()
     return args_
@@ -57,7 +59,7 @@ if __name__ == '__main__':
     files_list = dataset.json()['data']['latestVersion']['files']
     dataset_dbid = dataset.json()['data']['id']
 
-    if args.remove is True:
+    if args.remove == 'True':
         # the following deletes all the files in the dataset
         delete_api = dataverse_server + \
             '/dvn/api/data-deposit/v1.1/swordv2/edit-media/file/'
@@ -89,6 +91,6 @@ if __name__ == '__main__':
                 args.doi, join(root,f), df.json())
             check_dataset_lock(5)
 
-    if args.publish is True:
+    if args.publish == 'True':
         # publish updated dataset
         resp = api.publish_dataset(args.doi, release_type="major")

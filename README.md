@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repo to Dataverse 
-        uses: atrisovic/dataverse-uploader@master
+        uses: IQSS/dataverse-uploader@v1.1
         with:
           DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
           DATAVERSE_SERVER: https://demo.dataverse.org
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repo to Dataverse 
-        uses: atrisovic/dataverse-uploader@master
+        uses: IQSS/dataverse-uploader@v1.1
         with:
           DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
           DATAVERSE_SERVER: https://demo.dataverse.org
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repo to Dataverse 
-        uses: atrisovic/dataverse-uploader@master
+        uses: IQSS/dataverse-uploader@v1.1
         with:
           DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
           DATAVERSE_SERVER: https://demo.dataverse.org
@@ -81,7 +81,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repo to Dataverse 
-        uses: atrisovic/dataverse-uploader@master
+        uses: IQSS/dataverse-uploader@v1.1
         with:
           DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
           DATAVERSE_SERVER: https://demo.dataverse.org

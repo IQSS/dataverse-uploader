@@ -1,7 +1,0 @@
-cff-version: 1.2.0
-authors:
-  - family-names: Trisovic
-    given-names: Ana
-    orcid: https://orcid.org/0000-0003-1991-0533
-title: "Dataverse Uploader GitHub Action"
-date-released: 2021-11-13

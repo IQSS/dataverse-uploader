@@ -25,7 +25,7 @@ def parse_arguments():
     parser.add_argument(
         "-p", "--publish", help="Publish a new dataset version after upload.", \
         choices=('True', 'TRUE', 'true', 'False', 'FALSE', 'false'), \
-        default='true')
+        default='false')
 
     args_ = parser.parse_args()
     return args_

@@ -71,20 +71,28 @@ if __name__ == '__main__':
                 delete_api + str(fileid), \
                 auth = (token  , ""))
 
-    # the following adds all files from the repository to Dataverse
+    # check if there is a list of dirs to upload 
+    paths = ['repo']
+    exclude_dirs = []
     if args.dir:
-        dirs = args.dir.replace(",", " ")
+        dirs = args.dir.strip().lstrip("-")
+        dirs = dirs.replace(",", " ")
         dirs = dirs.split()
-        paths = [join('repo', path) for path in dirs]
-    else:
-        paths = ['repo']
+        # check if the list of dirs should be excluded
+        if args.dir.strip()[0] == "-":
+            exclude_dirs = dirs
+        else:
+            paths = [join('repo', d) for d in dirs]
 
+    # the following adds all files from the repository to Dataverse
     for path in paths:
         for root, subdirs, files in walk(path):
             if '.git' in subdirs:
                 subdirs.remove('.git')
             if '.github' in subdirs:
                 subdirs.remove('.github')
+            if exclude_dirs:
+                for exp in exclude_dirs: subdirs.remove(exp)
             for f in files:
                 df = Datafile()
                 df.set({

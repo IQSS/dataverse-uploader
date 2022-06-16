@@ -71,27 +71,33 @@ if __name__ == '__main__':
                 delete_api + str(fileid), \
                 auth = (token  , ""))
 
-    # the following adds all files from the repository to Dataverse
-    path = join('repo',args.dir) if args.dir else 'repo'
+    # check if there is a list of dirs to upload 
+    paths = ['repo']
+    if args.dir:
+        dirs = args.dir.strip().replace(",", " ")
+        dirs = dirs.split()
+        paths = [join('repo', d) for d in dirs]
 
-    for root, subdirs, files in walk(path):
-        if '.git' in subdirs:
-            subdirs.remove('.git')
-        if '.github' in subdirs:
-            subdirs.remove('.github')
-        for f in files:
-            df = Datafile()
-            df.set({
-                "pid" : args.doi,
-                "filename" : f,
-                "directoryLabel": root[5:],
-                "description" : \
-                  "Uploaded with GitHub Action from {}.".format(
-                    args.repo),
-                })
-            resp = api.upload_datafile(
-                args.doi, join(root,f), df.json())
-            check_dataset_lock(5)
+    # the following adds all files from the repository to Dataverse
+    for path in paths:
+        for root, subdirs, files in walk(path):
+            if '.git' in subdirs:
+                subdirs.remove('.git')
+            if '.github' in subdirs:
+                subdirs.remove('.github')
+            for f in files:
+                df = Datafile()
+                df.set({
+                    "pid" : args.doi,
+                    "filename" : f,
+                    "directoryLabel": root[5:],
+                    "description" : \
+                      "Uploaded with GitHub Action from {}.".format(
+                        args.repo),
+                    })
+                resp = api.upload_datafile(
+                    args.doi, join(root,f), df.json())
+                check_dataset_lock(5)
 
     if args.publish.lower() == 'true':
         # publish updated dataset

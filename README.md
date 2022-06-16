@@ -60,6 +60,21 @@ steps:
       GITHUB_DIR: data
 ```
 
+You can upload multiple subdirectories (only) by listing them as `GITHUB_DIR` in the following format:
+
+```
+steps:
+  - name: Send repo to Dataverse 
+    uses: IQSS/dataverse-uploader@v1.2
+    with:
+      DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
+      DATAVERSE_SERVER: https://demo.dataverse.org
+      DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
+      GITHUB_DIR: |
+        data
+        plots 
+```
+
 By default, the action will sync the GitHub repository and the Dataverse dataset, meaning that it will
 delete the Dataverse content before uploading the content from GitHub. If you don't want the action to 
 delete your dataset before upload (i.e., if you already have a Dataverse `DRAFT` dataset), 
@@ -103,6 +118,10 @@ Yes, the action is able to automatically update the Dataverse dataset. In other 
 is triggered with every `push` to the GitHub repository, it will automatically upload its content to
 Dataverse. You specify the action triggers in the workflow (`.yml`) file, and in this case, it would 
 contain `on: push` line to execute the action on every push to the repository.
+
+> Will the action work with dataset Handles as persistent identifiers (PIDs) instead of DOIs?
+
+Yes, the action uses Dataverse API that supports both DOIs and Handles for retrieving and uploading data.
 
 ## Related projects
 

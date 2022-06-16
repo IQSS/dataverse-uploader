@@ -72,26 +72,32 @@ if __name__ == '__main__':
                 auth = (token  , ""))
 
     # the following adds all files from the repository to Dataverse
-    path = join('repo',args.dir) if args.dir else 'repo'
+    if args.dir:
+        dirs = args.dir.replace(",", " ")
+        dirs = dirs.split()
+        paths = [join('repo', path) for path in dirs]
+    else:
+        paths = ['repo']
 
-    for root, subdirs, files in walk(path):
-        if '.git' in subdirs:
-            subdirs.remove('.git')
-        if '.github' in subdirs:
-            subdirs.remove('.github')
-        for f in files:
-            df = Datafile()
-            df.set({
-                "pid" : args.doi,
-                "filename" : f,
-                "directoryLabel": root[5:],
-                "description" : \
-                  "Uploaded with GitHub Action from {}.".format(
-                    args.repo),
-                })
-            resp = api.upload_datafile(
-                args.doi, join(root,f), df.json())
-            check_dataset_lock(5)
+    for path in paths:
+        for root, subdirs, files in walk(path):
+            if '.git' in subdirs:
+                subdirs.remove('.git')
+            if '.github' in subdirs:
+                subdirs.remove('.github')
+            for f in files:
+                df = Datafile()
+                df.set({
+                    "pid" : args.doi,
+                    "filename" : f,
+                    "directoryLabel": root[5:],
+                    "description" : \
+                      "Uploaded with GitHub Action from {}.".format(
+                        args.repo),
+                    })
+                resp = api.upload_datafile(
+                    args.doi, join(root,f), df.json())
+                check_dataset_lock(5)
 
     if args.publish.lower() == 'true':
         # publish updated dataset

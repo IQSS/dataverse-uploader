@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repo to Dataverse 
-        uses: IQSS/dataverse-uploader@v1.2
+        uses: IQSS/dataverse-uploader@v1.3
         with:
           DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
           DATAVERSE_SERVER: https://demo.dataverse.org
@@ -52,7 +52,7 @@ you should add the `GITHUB_DIR` argument in your workflow, as follows:
 ```
 steps:
   - name: Send repo to Dataverse 
-    uses: IQSS/dataverse-uploader@v1.2
+    uses: IQSS/dataverse-uploader@v1.3
     with:
       DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
       DATAVERSE_SERVER: https://demo.dataverse.org
@@ -68,7 +68,7 @@ set the `DELETE` argument to `False` like:
 ```
 steps:
   - name: Send repo to Dataverse 
-    uses: IQSS/dataverse-uploader@v1.2
+    uses: IQSS/dataverse-uploader@v1.3
     with:
       DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
       DATAVERSE_SERVER: https://demo.dataverse.org
@@ -84,7 +84,7 @@ set the `PUBLISH` argument to `True`.
 ```
 steps:
   - name: Send repo to Dataverse 
-    uses: IQSS/dataverse-uploader@v1.2
+    uses: IQSS/dataverse-uploader@v1.3
     with:
       DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
       DATAVERSE_SERVER: https://demo.dataverse.org

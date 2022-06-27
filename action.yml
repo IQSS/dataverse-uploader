@@ -18,12 +18,15 @@ inputs:
     GITHUB_DIR:
       required: false
       description: "upload only from specific dirs"
+      default: ""
     DELETE:
       required: false
       description: "delete all files before upload"
+      default: 'true'
     PUBLISH:
       required: false
       description: "publish after upload"
+      default: 'false'
 
 runs:
     using: "composite"

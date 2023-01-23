@@ -1,6 +1,14 @@
 ## Testing locally
 
-To test your contribution locally from the command line, run the Python script in the following format:
+To test your contribution locally from the command line, first install the necessary dependencies:
+
+```
+python3 -m venv env
+source env/bin/activate
+python3 -m pip install -r requirements.txt
+```
+
+Then run the Python script in the following format:
 
 ```
 python dataverse.py DATAVERSE_TOKEN DATAVERSE_SERVER DATASET_DOI REPO_NAME

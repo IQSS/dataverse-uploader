@@ -13,16 +13,20 @@ python dataverse.py DATAVERSE_TOKEN DATAVERSE_SERVER DATASET_DOI REPO_NAME
 
 Examples:
 
-- To upload everything from a current folder use:
+- To upload everything from a current folder, use:
 
 ```
 python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -d .
 ```
 
-- To upload files from another folder on the system use:
+- To upload files from another folder on the system, use:
 
 ```
 python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -d /tmp/files-to-upload
 ```
 
-You can append this command with optional arguments such as `--dir data --remove False --publish True`
+- You can append this command with optional arguments such as --remove/-r False` and `--publish/-p True`:
+
+```
+python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -d /tmp/files-to-upload -r False -p True
+```

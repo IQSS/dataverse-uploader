@@ -60,7 +60,7 @@ steps:
       GITHUB_DIR: data
 ```
 
-You can upload multiple subdirectories (only) by listing them as `GITHUB_DIR` in the following format:
+You can upload multiple subdirectories by listing them as `GITHUB_DIR` in the following format:
 
 ```
 steps:
@@ -111,17 +111,20 @@ steps:
 
 ## Q&A
 
-> If you change the content of your GitHub repository, are the changes synchronized in Dataverse? 
-> Otherwise, is it possible to synchronize them automatically?
+1. If you change the content of your GitHub repository, are the changes synchronized in Dataverse? Otherwise, is it possible to synchronize them automatically?
 
 Yes, the action is able to automatically update the Dataverse dataset. In other words, if the action
 is triggered with every `push` to the GitHub repository, it will automatically upload its content to
 Dataverse. You specify the action triggers in the workflow (`.yml`) file, and in this case, it would 
 contain `on: push` line to execute the action on every push to the repository.
 
-> Will the action work with dataset Handles as persistent identifiers (PIDs) instead of DOIs?
+2. Will the action work with dataset Handles as persistent identifiers (PIDs) instead of DOIs?
 
 Yes, the action uses Dataverse API that supports both DOIs and Handles for retrieving and uploading data.
+
+3. How do I contribute to this project?
+
+Have a look at the instructions in the `CONTRIBUTING.md` file.
 
 ## Related projects
 

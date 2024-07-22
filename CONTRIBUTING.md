@@ -34,7 +34,7 @@ python dataverse.py DATAVERSE_TOKEN DATAVERSE_SERVER DATASET_DOI REPO_NAME -p TR
 
 - `DATAVERSE_TOKEN` - dataverse token should be a valid token
 - `DATAVERSE_SERVER` - for testing use https://demo.dataverse.org/
-- `DATASET_DOI` - it should be a valid PID from Dataverse demo or a Dataverse instalation 
+- `DATASET_DOI` - it should be a valid PID from Dataverse demo or a Dataverse installation
 - `REPO_NAME` - for the local test, this is a **mock GitHub repository name**, and it should be a string, such as "user/my-repo" or similar
 
 The script will upload everything from **the helper `repo` folder** to the `DATAVERSE_SERVER` at dataset `DATASET_DOI`.

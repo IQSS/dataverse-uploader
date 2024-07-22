@@ -68,3 +68,15 @@ The multiple directories with files need to be stored inside the helper `repo` f
 ```
 python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -r False -p True
 ```
+
+### Making Releases
+
+Here are the steps for making a release:
+
+1. In the README, replace all instances of the old version with the version you intend to release.
+1. Draft a new release and make sure the box is checked to publish the action to the GitHub Marketplace.
+1. Under "choose a tag", create a tag for the next version. Keep "target" as the default branch.
+1. Under "release title" use "Dataverse Uploader Action".
+1. Click "generate release notes" and edit as desired.
+1. Publish the release.
+1. Check to make sure the release was published to <https://github.com/marketplace/actions/dataverse-uploader-action>.

@@ -20,6 +20,7 @@ To use this action, you will need the following input parameters:
 | `GITHUB_DIR` | No | Use `GITHUB_DIR` if you would like to upload files from only one or more subdirectories in your GitHub repository (i.e., `data/`, `plots/`).                                                                                                                                                                                                                                                                                                                                           |
 | `DELETE` | No | Can be `True` or `False` (by default `True`) depending on whether all files should be deleted in the dataset on Dataverse before upload.                                                                                                                                                                                                                                                                                                                                       |
 | `PUBLISH` | No | Can be `True` or `False` (by default `False`) depending on whether you'd like to automatically create a new version of the dataset upon upload. If `False`, the uploaded dataset will be a `DRAFT`.                                                                                                                                                                                                                                                                            |
+| `REVIEW` | No | Can be `True` or `False` (by default `False`) depending on whether you'd like to automatically submit the dataset for review upon upload. If `True`, the uploaded dataset will be a `In Review`.                                                                                                                                                                                                                                                                            |
 
 ## Usage
 
@@ -107,6 +108,22 @@ steps:
       GITHUB_DIR: data
       DELETE: False
       PUBLISH: True
+```
+
+If you would like the action to submit the dataset for review instead:
+
+```
+steps:
+  - name: Send repo to Dataverse 
+    uses: IQSS/dataverse-uploader@v1.6
+    with:
+      DATAVERSE_TOKEN: ${{secrets.DATAVERSE_TOKEN}}
+      DATAVERSE_SERVER: https://demo.dataverse.org
+      DATAVERSE_DATASET_DOI: doi:10.70122/FK2/LVUA
+      GITHUB_DIR: data
+      DELETE: False
+      PUBLISH: False
+      REVIEW: True
 ```
 
 ## Q&A

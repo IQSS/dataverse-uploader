@@ -26,6 +26,11 @@ def parse_arguments():
         "-p", "--publish", help="Publish a new dataset version after upload.", \
         choices=('True', 'TRUE', 'true', 'False', 'FALSE', 'false'), \
         default='false')
+    parser.add_argument(
+        "-rev", "--review", help="Submit the dataset for review after upload.",
+        choices=("True", "TRUE", "true", "False", "FALSE", "false"),
+        default="false",
+    )
 
     args_ = parser.parse_args()
     return args_
@@ -102,3 +107,16 @@ if __name__ == '__main__':
     if args.publish.lower() == 'true':
         # publish updated dataset
         resp = api.publish_dataset(args.doi, release_type="major")
+
+    if args.review.lower() == "true":
+        headers = {
+            "X-Dataverse-key": token,
+        }
+        payload = {
+            "persistentId": args.doi,
+        }
+        response = requests.post(
+            dataverse_server + "/api/datasets/:persistentId/submitForReview",
+            payload=params,
+            headers=headers,
+        )

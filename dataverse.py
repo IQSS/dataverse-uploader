@@ -76,7 +76,7 @@ if __name__ == '__main__':
                 delete_api + str(fileid), \
                 auth = (token  , ""))
 
-    # check if there is a list of dirs to upload 
+    # check if there is a list of dirs to upload
     paths = ['repo']
     if args.dir:
         dirs = args.dir.strip().replace(",", " ")
@@ -117,6 +117,6 @@ if __name__ == '__main__':
         }
         response = requests.post(
             dataverse_server + "/api/datasets/:persistentId/submitForReview",
-            payload=params,
+            params=payload,
             headers=headers,
         )

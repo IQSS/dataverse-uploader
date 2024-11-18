@@ -27,6 +27,10 @@ inputs:
       required: false
       description: "publish after upload"
       default: 'false'
+    REVIEW:
+      required: false
+      description: "submit for review after upload"
+      default: 'false'
 
 runs:
     using: "composite"
@@ -56,3 +60,4 @@ runs:
             -d "${{inputs.GITHUB_DIR}}" 
             -r "${{inputs.DELETE}}" 
             -p "${{inputs.PUBLISH}}" 
+            -rev "${{inputs.REVIEW}}"

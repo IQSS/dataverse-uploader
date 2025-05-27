@@ -80,12 +80,16 @@ if __name__ == '__main__':
 
     # the following adds all files from the repository to Dataverse
     for path in paths:
+        print(f"Uploading files from {path} to Dataverse...")
         for root, subdirs, files in walk(path):
+            print(f"Current directory: {root}")
+            print(f"Subdirectories: {subdirs}")
             if '.git' in subdirs:
                 subdirs.remove('.git')
             if '.github' in subdirs:
                 subdirs.remove('.github')
             for f in files:
+                print(f"Uploading {f} to Dataverse...")
                 df = Datafile()
                 df.set({
                     "pid" : args.doi,

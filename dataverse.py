@@ -72,11 +72,11 @@ if __name__ == '__main__':
                 auth = (token  , ""))
 
     # check if there is a list of dirs to upload 
-    paths = ['repo']
+    paths = [args.repo]
     if args.dir:
         dirs = args.dir.strip().replace(",", " ")
         dirs = dirs.split()
-        paths = [join('repo', d) for d in dirs]
+        paths = [join(args.repo, d) for d in dirs]
 
     # the following adds all files from the repository to Dataverse
     for path in paths:

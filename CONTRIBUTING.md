@@ -47,6 +47,12 @@ The script will upload everything from **the helper `repo` folder** to the `DATA
 python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -p TRUE
 ```
 
+- To upload files and submit the data record for review:
+
+```
+python dataverse.py 9s3-7d46-hd https://demo.dataverse.org/ doi:10.70122/FK2/LVUADQ user/my-repo -p FALSE -rev TRUE
+```
+
 - To upload files from a single folder, use:
 
 ```
